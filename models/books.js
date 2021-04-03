@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
-const destinationSchema = new Schema({
+const sellerSchema = require('./sellers');
+
+const bookSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -16,11 +18,12 @@ const destinationSchema = new Schema({
     label: {
         type: String,
         default: ''
-    }
+    },
+    sellers: [ sellerSchema ]
 },{
     timestamps: true
 });
 
-var Destinations = mongoose.model('Destination', destinationSchema);
+var Books = mongoose.model('Book', bookSchema);
 
-module.exports = Destinations;
+module.exports = Books;
